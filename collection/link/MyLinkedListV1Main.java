@@ -1,11 +1,11 @@
-package collection.array;
+package collection.link;
 
 
-public class MyArrayListV1Main {
+public class MyLinkedListV1Main {
 
     public static void main(String[] args) {
 
-        MyArrayListV1 list = new MyArrayListV1();
+        MyLinkedListV1 list = new MyLinkedListV1();
         System.out.println("== 데이터 추가==");
         System.out.println(list);
         list.add("a");
@@ -27,7 +27,7 @@ public class MyArrayListV1Main {
         System.out.println(list);
         list.add("e");
         System.out.println(list);
-        
+
         // 범위 초가, 배열(capacity)의 크기가 늘어나지 않으면 예외 발생
         list.add("f");
         System.out.println(list);

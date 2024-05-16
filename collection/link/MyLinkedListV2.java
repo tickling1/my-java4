@@ -1,9 +1,9 @@
 package collection.link;
 
-public class MyLinkedListV1 {
+public class MyLinkedListV2 {
 
     private Node first; // 첫 노드의 위치를 가르킨다.
-    private int size = 0; //
+    private int size = 0;
 
     public void add(Object e) {
         Node newNode = new Node(e);
@@ -12,6 +12,20 @@ public class MyLinkedListV1 {
         } else {
             Node lastNode = getLastNode();
             lastNode.next = newNode;
+        }
+        size++;
+    }
+    
+    // 추가 코드
+    public void add(int index, Object e) {
+        Node newNode = new Node(e);
+        if (index == 0) {
+            newNode.next = first;
+            first = newNode;
+        } else {
+            Node prev = getNode(index - 1);
+            newNode.next = prev.next;
+            prev.next = newNode;
         }
         size++;
     }
@@ -30,6 +44,23 @@ public class MyLinkedListV1 {
         x.item = element;
         return oldValue;
     }
+
+    // 추가 코드
+    public Object remove(int index) {
+        Node removeNode = getNode(index);
+        Object removeItem = removeNode.item;
+        if (index == 0) {
+            first = removeNode.next;
+        } else {
+            Node prev = getNode(index - 1);
+            prev.next = removeNode.next;
+        }
+        removeNode.next = null;
+        removeNode.item = null;
+        size--;
+        return removeItem;
+    }
+
     public Object get(int index) {
         Node x = getNode(index);
         return x.item;
@@ -43,30 +74,18 @@ public class MyLinkedListV1 {
         return x;
     }
 
-    public int indexOf(Object item) {
-        Node x = first;
-        for (int i = 0; i < size; i++) {
-            if (item.equals(x.item)) {
-                return i;
-            } else {
-                x = x.next;
-            }
+
+
+    public int indexOf(Object o) {
+        int index = 0;
+        for (Node x = first; x != null; x = x.next) {
+        if (o.equals(x.item)) {
+            return index;
+        }
+        index++;
         }
         return -1;
     }
-
-    /**
-     * public int indexOf(Object o) {
-     *  int index = 0;
-     *  for (Node x = first; x != null; x = x.next) {
-     *  if (o.equals(x.item))
-     *  return index;
-     *  index++;
-     *  }
-     *  return -1;
-     *  }
-     *
-     */
 
     public int size() {
         return size;
@@ -74,7 +93,7 @@ public class MyLinkedListV1 {
 
     @Override
     public String toString() {
-        return "MyLinkedListV1{" +
+        return "MyLinkedListV2{" +
                 "first=" + first +
                 ", size=" + size +
                 '}';
